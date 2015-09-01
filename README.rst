@@ -42,6 +42,7 @@ Every option available as documented by `Duo Security <https://www.duosecurity.c
 set in pillar.
 
 ::
+
     duo:
       config:
         ikey: YOUR_INTEGRATION_KEY
