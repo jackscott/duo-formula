@@ -18,12 +18,12 @@ Available states
 ``duo.login``
 -------------
 
-Installs and configures the login_duo package.
+Installs and configures the *login_duo* package.
 
 ``duo.pam``
 -----------
 
-Installs and configures the pam_duo package.
+Installs and configures the *pam_duo* package.
 
 ``duo.pkgrepo``
 ---------------
@@ -40,3 +40,11 @@ Undo the effects of ``duo.pkgrepo``.
 
 Every option available as documented by `Duo Security <https://www.duosecurity.com/docs/duounix#first-steps>`_ can be
 set in pillar.
+
+::
+    duo:
+      config:
+        ikey: YOUR_INTEGRATION_KEY
+        skey: YOUR_SECRET_KEY
+        host: YOUR_API_HOSTNAME
+        ...
