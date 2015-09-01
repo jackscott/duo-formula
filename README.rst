@@ -1,9 +1,8 @@
-================
-template-formula
-================
+============
+Duo Security
+============
 
-A saltstack formula that is empty. It has dummy content to help with a quick
-start on a new formula.
+`Duo Security <https://www.duosecurity.com/>`_ Duo Unix - Two-Factor Authentication
 
 .. note::
 
@@ -16,7 +15,28 @@ Available states
 .. contents::
     :local:
 
-``template``
-------------
+``duo.login``
+-------------
 
-Installs the template package, and starts the associated template service.
+Installs and configures the login_duo package.
+
+``duo.pam``
+-----------
+
+Installs and configures the pam_duo package.
+
+``duo.pkgrepo``
+---------------
+
+Enable the official Duo Security package repository in order to always benefit from the latest version.
+
+``duo.pkgrepo.absent``
+----------------------
+
+Undo the effects of ``duo.pkgrepo``.
+
+``Configuration``
+=================
+
+Every option available as documented by `Duo Security <https://www.duosecurity.com/docs/duounix#first-steps>`_ can be
+set in pillar.
