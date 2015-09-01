@@ -8,3 +8,4 @@ duosecurity:
     - gpgkey: https://www.duosecurity.com/RPM-GPG-KEY-DUO
     - skip_if_unavailable: True
     - enabled: 1
+    - order: 1
