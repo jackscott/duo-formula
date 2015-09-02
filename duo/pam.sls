@@ -14,3 +14,7 @@ pam_duo:
   file.managed:
     - name: {{ duo.config_dir }}pam_duo.conf
     - source: salt://{{ slspath }}/files/duo.conf
+    - template: jinja
+    - user: 'root'
+    - group: 'root'
+    - mode: '0600'

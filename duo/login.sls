@@ -14,3 +14,7 @@ login_duo:
   file.managed:
     - name: {{ duo.config_dir }}login_duo.conf
     - source: salt://{{ slspath }}/files/duo.conf
+    - template: jinja
+    - user: {{ duo.user }}
+    - group: 'root'
+    - mode: '0600'
