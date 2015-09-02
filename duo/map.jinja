@@ -1,33 +1,30 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
 
-{## Start with  defaults from defaults.sls ##}
-{% import_yaml 'template/defaults.yaml' as default_settings %}
-
-{## 
-Setup variable using grains['os_family'] based logic, only add key:values here
-that differ from whats in defaults.yaml
-##}
-{% set os_family_map = salt['grains.filter_by']({
-        'Debian': {},
-        'Suse': {},
-        'Arch': {
-            "pkg" : 'template-arch',
-        },
-        'RedHat': {
-            "config": '/etc/template.conf',
-        },
-  }
-  , grain="os_family"
-  , merge=salt['pillar.get']('template:lookup'))
-%}
-{## Merge the flavor_map to the default settings ##}
-{% do default_settings.template.update(os_family_map) %}
-
-{## Merge in template:lookup pillar ##}
-{% set template = salt['pillar.get'](
-        'template',
-        default=default_settings.template,
-        merge=True
-    )
-%}
+{% set duo = salt['grains.filter_by']({
+    'Debian': {
+      'use_official': False,
+      'login_duo_pkg': 'login-duo',
+      'pam_duo_pkg': 'libpam-duo',
+      'config_dir': '/etc/security/',
+    },
+    'RedHat': {
+      'use_official': True,
+      'login_duo_pkg': 'duo_unix',
+      'pam_duo_pkg': 'duo_unix',
+      'config_dir': '/etc/duo/',
+    },
+}, merge=salt['grains.filter_by']({
+    'wheezy': {
+      'use_official': True,
+      'login_duo_pkg': 'duo-unix',
+      'pam_duo_pkg': 'duo-unix',
+      'config_dir': '/etc/duo/',
+    },
+    'precise': {
+      'use_official': True,
+      'login_duo_pkg': 'duo-unix',
+      'pam_duo_pkg': 'duo-unix',
+      'config_dir': '/etc/duo/',
+    },
+}, grain='oscodename', merge=salt['pillar.get']('duo:lookup')) %}

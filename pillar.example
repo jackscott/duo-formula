@@ -1,3 +1,12 @@
-template:
+duo:
   lookup:
-    master: template-master
+    use_official: False
+    login_duo_pkg: login-duo
+    pam_duo_pkg: libpam-duo
+    config_dir: /etc/security/
+  config:
+    ikey: BRTYMPKRR8TI06H8Y938
+    skey: V8hLztP5rb8L78C4wWkpnmSGvqTPQqqj5NoRbbYu
+    host: api-5c3dee43.duosecurity.com
+    pushinfo: 'yes'
+    autopush: 'yes'
