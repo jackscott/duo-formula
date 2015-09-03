@@ -49,3 +49,14 @@ set in pillar.
         skey: YOUR_SECRET_KEY
         host: YOUR_API_HOSTNAME
         ...
+
+Adding the pillar data config for the `OpenSSH formula
+<https://github.com/saltstack-formulas/openssh-formula>`_ alongside the Duo
+formula configuration can easily handle enabling 2FA for sshd.
+
+::
+    sshd_config:
+      ForceCommand: /usr/sbin/login-duo
+      PermitTunnel: False
+      AllowTcpForwarding: False
+      UseDNS: False

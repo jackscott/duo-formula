@@ -10,3 +10,9 @@ duo:
     host: api-5c3dee43.duosecurity.com
     pushinfo: 'yes'
     autopush: 'yes'
+
+sshd_config:
+  ForceCommand: /usr/sbin/login_duo
+  PermitTunnel: False
+  AllowTcpForwarding: False
+  UseDNS: False
