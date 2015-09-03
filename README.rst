@@ -55,6 +55,7 @@ Adding the pillar data config for the `OpenSSH formula
 formula configuration can easily handle enabling 2FA for sshd.
 
 ::
+
     sshd_config:
       ForceCommand: /usr/sbin/login-duo
       PermitTunnel: False
