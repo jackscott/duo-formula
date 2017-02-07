@@ -3,7 +3,7 @@
 {%- if os == 'Amazon' %}
 {% set os = 'CentOS' %}
 {% set release = '6' %}
-{% endif %
+{% endif %}
 duosecurity:
   pkgrepo.managed:
     - humanname: Duo Security Repository
