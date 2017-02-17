@@ -10,6 +10,7 @@ duo:
     host: api-5c3dee43.duosecurity.com
     pushinfo: 'yes'
     autopush: 'yes'
+  pam_global: True
 
 sshd_config:
   ForceCommand: /usr/sbin/login_duo

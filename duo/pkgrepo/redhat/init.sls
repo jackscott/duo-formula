@@ -1,13 +1,8 @@
-{% set os = grains['os'] %}
-{% set release = '$releasever' %}
-{%- if os == 'Amazon' %}
-{% set os = 'CentOS' %}
-{% set release = '6' %}
-{% endif %}
+{%- from "duo/pkgrepo/redhat/map.jinja" import repo_uri with context %}
 duosecurity:
   pkgrepo.managed:
     - humanname: Duo Security Repository
-    - baseurl: http://pkg.duosecurity.com/{{ os }}/{{ release }}/$basearch
+    - baseurl: {{ repo_uri }}
     - gpgcheck: 1
     - gpgkey: https://www.duosecurity.com/RPM-GPG-KEY-DUO
     - skip_if_unavailable: True
