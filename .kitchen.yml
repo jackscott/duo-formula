@@ -1,0 +1,44 @@
+driver:
+  name: vagrant
+
+platforms:
+  - name: bento/centos-7.3
+
+provisioner:
+  name: salt_solo
+  require_chef_omnibus: false
+  require_chef: false
+  formula: duo
+  pillars:
+    top.sls:
+      base:
+        '*':
+          - duo
+    duo.sls:
+      duo:
+        lookup:
+          use_official: True
+          user: sshd
+        config:
+          ikey: BRTYMPKRR8TI06H8Y938
+          skey: V8hLztP5rb8L78C4wWkpnmSGvqTPQqqj5NoRbbYu
+          host: api-5c3dee43.duosecurity.com
+          pushinfo: 'yes'
+          autopush: 'yes'
+
+verifier:
+  name: inspec
+
+suites:
+  - name: pam
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - duo.pam
+  - name: login
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - duo.login
