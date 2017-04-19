@@ -2,7 +2,9 @@ driver:
   name: vagrant
 
 platforms:
-  - name: bento/centos-7.3
+  - name: ubuntu-16.04
+  # - name: centos-7.3
+  # - name: ubuntu-14.04
 
 provisioner:
   name: salt_solo
@@ -26,8 +28,6 @@ provisioner:
           pushinfo: 'yes'
           autopush: 'yes'
 
-verifier:
-  name: inspec
 
 suites:
   - name: pam

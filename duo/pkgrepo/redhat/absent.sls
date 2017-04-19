@@ -1,2 +1,0 @@
-duosecurity:
-  pkgrepo.absent

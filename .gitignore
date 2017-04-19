@@ -2,3 +2,4 @@
 .kitchen.local.yml
 .ruby*
 chefignore
+Gemfile.lock

@@ -1,31 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
+{% from "duo/defaults.yaml" import lookup_map with context %}
+{% from "duo/defaults.yaml" import pam_map with context %}
 
-{% set duo = salt['grains.filter_by']({
-    'Debian': {
-      'use_official': False,
-      'login_duo_pkg': 'login-duo',
-      'pam_duo_pkg': 'libpam-duo',
-      'config_dir': '/etc/security/',
-      'user': 'sshd',
-    },
-    'RedHat': {
-      'use_official': True,
-      'login_duo_pkg': 'duo_unix',
-      'pam_duo_pkg': 'duo_unix',
-      'config_dir': '/etc/duo/',
-    },
-}, merge=salt['grains.filter_by']({
-    'wheezy': {
-      'use_official': True,
-      'login_duo_pkg': 'duo-unix',
-      'pam_duo_pkg': 'duo-unix',
-      'config_dir': '/etc/duo/',
-    },
-    'precise': {
-      'use_official': True,
-      'login_duo_pkg': 'duo-unix',
-      'pam_duo_pkg': 'duo-unix',
-      'config_dir': '/etc/duo/',
-    },
-}, grain='oscodename', merge=salt['pillar.get']('duo:lookup'))) %}
+{%- set sshd_patterns = salt['grains.filter_by'](pam_map, base="Debian") %}
+
+{% set _g = salt['grains.get']('duo:lookup', {}) %}
+{% set _p = salt['pillar.get']('duo:lookup', _g, merge=True) %}
+{% set duo = salt['grains.filter_by'](lookup_map, merge=_p, base='default') %}

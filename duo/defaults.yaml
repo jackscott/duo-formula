@@ -1,0 +1,58 @@
+
+{% load_yaml as lookup_map %}
+default:
+  use_official: false
+  login_duo_pkg: 'login-duo'
+  pkg_deps:
+    - libssl-dev
+    - libpam-dev
+  pam_duo_pkg: 'libpam-duo'
+  pam_conf: /etc/pam.d/common-auth
+  pam_sshd: /etc/pam.d/sshd
+  config_dir: /etc/security
+  user: sshd
+  enable_pattern: r'^auth\s+sufficient\s+pam_unix.so\s+nullok\s+try_first_pass$'
+  repo_uri: ~
+  enable_repl: |
+    auth  requisite pam_unix.so nullok_secure
+    auth  [success=1 default=ignore] pam_duo.so
+RedHat:
+  repo_uri: "http://pkg.duosecurity.com/RedHat/$releasever/$basearch"
+  login_duo_pkg: duo_unix
+  pam_duo_pkg: duo_unix
+  config_dir: '/etc/duo/'
+  enable_pattern: r'^auth\s+sufficient\s+pam_unix.so\s+nullok\s+try_first_pass$'
+  pkg_deps:
+    - openssl-devel
+    - pam-devel
+    - zlib-devel
+    
+  enable_repl: |
+    auth  requisite pam_unix.so nullok try_first_pass
+    auth  sufficient pam_duo.so
+Amazon:
+  repo_uri: "http://pkg.duosecurity.com/CentOS/7/$basearch"
+CentOS:
+  repo_uri: "http://pkg.duosecurity.com/CentOS/$releasever/$basearch"
+{% endload %}
+
+{% load_yaml as pam_map %}
+Amazon:
+  pattern: r"^auth\s+substack\s+password-auth$"
+  repl: "auth  required pam_duo.so"
+
+RedHat:
+  pattern: r"^auth\s+substack\s+password-auth$"
+  repl: |
+    auth  required pam_env.so
+    auth  sufficient pam_duo.so
+    auth  required pam_deny.so
+
+Debian:
+  pattern: r'^@include\s+common-auth$'
+  repl: |
+    auth  [success=1 default=ignore] pam_duo.so
+    auth  requisite pam_deny.so
+    auth  required pam_permit.so
+    auth  optional pam_cap.so
+{% endload %}

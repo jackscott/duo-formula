@@ -1,8 +1,0 @@
-{%- set repo_uri = salt['grains.filter_by'](
-  {
-    "Amazon": "http://pkg.duosecurity.com/CentOS/7/$basearch",
-    "CentOS": "http://pkg.duosecurity.com/CentOS/$releasever/$basearch",
-    "default": "http://pkg.duosecurity.com/RedHat/$releasever/$basearch"
-  },
-  grain="os"
-) %}
