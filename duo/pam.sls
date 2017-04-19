@@ -26,6 +26,8 @@ pam_duo:
     - user: 'root'
     - group: 'root'
     - mode: '0600'
+    - force: true
+    - replace: true
     - require:
         - pkg: pam_duo
         - file: duo-setup

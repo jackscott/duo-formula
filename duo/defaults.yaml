@@ -6,6 +6,7 @@ default:
   pkg_deps:
     - libssl-dev
     - libpam-dev
+    - duo-unix
   pam_duo_pkg: 'libpam-duo'
   # global pam 
   pam_conf: /etc/pam.d/common-auth
@@ -22,6 +23,7 @@ RedHat:
     - openssl-devel
     - pam-devel
     - zlib-devel
+    - duo-unix
 Amazon:
   repo_uri: "http://pkg.duosecurity.com/CentOS/7/$basearch"
   login_duo_pkg: duo_unix
@@ -31,6 +33,7 @@ Amazon:
     - openssl-devel
     - pam-devel
     - zlib-devel
+    - duo-unix
 CentOS:
   repo_uri: "http://pkg.duosecurity.com/CentOS/$releasever/$basearch"
   login_duo_pkg: duo_unix
@@ -40,6 +43,7 @@ CentOS:
     - openssl-devel
     - pam-devel
     - zlib-devel
+    - duo-unix
 {% endload %}
 
 {% load_yaml as osfinger_map %}
