@@ -1,10 +1,6 @@
 driver:
   name: vagrant
 
-platforms:
-  - name: ubuntu-16.04
-  # - name: centos-7.3
-  # - name: ubuntu-14.04
 
 provisioner:
   name: salt_solo
@@ -28,6 +24,10 @@ provisioner:
           pushinfo: 'yes'
           autopush: 'yes'
 
+platforms:
+  - name: ubuntu-16.04
+  # - name: centos-7.3
+  # - name: ubuntu-14.04
 
 suites:
   - name: pam

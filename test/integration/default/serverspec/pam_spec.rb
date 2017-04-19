@@ -1,3 +1,7 @@
+require "inspec"
+
+set :backend, :ext
+
 describe package('duo_unix') do
   it { should be_installed }
 end
