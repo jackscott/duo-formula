@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
 {% from "duo/defaults.yaml" import lookup_map with context %}
-{% from "duo/defaults.yaml" import pam_map with context %}
+{% from "duo/defaults.yaml" import osfinger_map with context %}
 
-{%- set sshd_patterns = salt['grains.filter_by'](pam_map, base="Debian") %}
+{%- set regex_patterns = salt['grains.filter_by'](osfinger_map, grain='osfinger', merge=salt['pillar.get']('duo:pam_lookup'), base="default") %}
 
 {% set _g = salt['grains.get']('duo:lookup', {}) %}
 {% set _p = salt['pillar.get']('duo:lookup', _g, merge=True) %}
